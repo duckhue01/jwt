@@ -1,9 +1,10 @@
+/*
+Copyright © 2023 DK duckhue01.tech@gmail.com
+*/
 package main
 
-import (
-	jwt "github.com/golang-jwt/jwt/v4"
-)
+import "github.com/duckhue01/jwt/cmd"
 
 func main() {
-	jwt.New(jwt.SigningMethodES256)
+	cmd.Execute()
 }
