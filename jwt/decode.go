@@ -1,51 +1,30 @@
 package jwt
 
 import (
-	"encoding/base64"
 	"fmt"
+
+	"github.com/golang-jwt/jwt/v5"
+	"github.com/hokaccha/go-prettyjson"
 )
 
-const (
-	DotTok = '.'
-)
+func Decode(s string) ([2]string, error) {
+	res := [2]string{}
+	token, err := jwt.Parse(s, nil)
+	if token == nil {
+		return res, fmt.Errorf("malformed token: %w", err)
+	}
 
-func Decode(s string) (string, error) {
-	segments := lexSegments(s)
-	header, err := DecodeSegment(segments[0])
+	header, err := prettyjson.Marshal(token.Header)
 	if err != nil {
-		return "", err
+		return res, fmt.Errorf("fail to encode header: %w", err)
 	}
+	res[0] = string(header)
 
-	body, err := DecodeSegment(segments[1])
+	body, err := prettyjson.Marshal(token.Claims)
 	if err != nil {
-		return "", err
+		return res, fmt.Errorf("fail to encode body: %w", err)
 	}
+	res[1] = string(body)
 
-	return fmt.Sprintln(header, body), nil
-
-}
-
-func DecodeSegment(seg string) ([]byte, error) {
-	encoding := base64.RawURLEncoding
-
-	// if l := len(seg) % 4; l > 0 {
-	// 	seg += strings.Repeat("=", 4-l)
-	// }
-	// encoding = base64.URLEncoding
-
-	// encoding = encoding.Strict()
-	return encoding.DecodeString(seg)
-}
-
-func lexSegments(s string) [3]string {
-	c := 0
-	segments := [3]string{}
-	segment := make([]rune, 0, 20)
-	for _, v := range s {
-		if v == DotTok {
-			segments[c] = string(segment)
-		}
-		segment = append(segment, v)
-	}
-	return segments
+	return res, nil
 }
