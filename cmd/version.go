@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 NAME HERE duckhue01.tech@gmail.com
+Copyright © 2023 DK duckhue01.tech@gmail.com
 */
 package cmd
 
