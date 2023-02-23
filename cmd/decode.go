@@ -6,7 +6,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/duckhue01/jwt-cli/jwt"
+	"github.com/duckhue01/jwt/jwt"
 	"github.com/spf13/cobra"
 )
 
