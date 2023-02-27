@@ -3,3 +3,5 @@ _
 
 # machine generated
 .DS_Store
+
+dist/
