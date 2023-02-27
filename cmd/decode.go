@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	REQUIRE_TOKEN_ERROR = "This command require a JWT token"
+	REQUIRE_TOKEN_ERROR = "this command require a JWT token"
 )
 
 // decodeCmd represents the decode command
@@ -20,23 +20,19 @@ var decodeCmd = &cobra.Command{
 	Short: "Decode a JSON web token",
 	Long:  "Decode a JSON web token",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(len(args))
 		if len(args) == 1 {
 			res, err := jwt.Decode(args[0])
 			if err != nil {
+				fmt.Println(err)
 
+				return
 			}
-			fmt.Println("Header:")
-			fmt.Println("------------")
-			fmt.Println(res[0])
-			fmt.Println("Claims:")
-			fmt.Println("------------")
-			fmt.Println(res[1])
+			fmt.Printf("Header(algorithms & token type...):\n%s\n\n", res.Header)
+			fmt.Printf("Body(claims):\n%s\n", res.Body)
 
-		} else {
-			fmt.Println(REQUIRE_TOKEN_ERROR)
+			return
 		}
-
+		fmt.Println(REQUIRE_TOKEN_ERROR)
 	},
 }
 

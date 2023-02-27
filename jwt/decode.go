@@ -7,24 +7,31 @@ import (
 	"github.com/hokaccha/go-prettyjson"
 )
 
-func Decode(s string) ([2]string, error) {
-	res := [2]string{}
+type DecodedToken struct {
+	Header string
+	Body   string
+}
+
+func Decode(s string) (*DecodedToken, error) {
+	res := new(DecodedToken)
 	token, err := jwt.Parse(s, nil)
 	if token == nil {
 		return res, fmt.Errorf("malformed token: %w", err)
 	}
 
+	jwt.NewParser()
+
 	header, err := prettyjson.Marshal(token.Header)
 	if err != nil {
-		return res, fmt.Errorf("fail to encode header: %w", err)
+		return res, fmt.Errorf("can't encode header: %w", err)
 	}
-	res[0] = string(header)
+	res.Header = string(header)
 
 	body, err := prettyjson.Marshal(token.Claims)
 	if err != nil {
-		return res, fmt.Errorf("fail to encode body: %w", err)
+		return res, fmt.Errorf("can't encode body: %w", err)
 	}
-	res[1] = string(body)
+	res.Body = string(body)
 
 	return res, nil
 }
