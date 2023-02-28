@@ -19,8 +19,6 @@ func Decode(s string) (*DecodedToken, error) {
 		return res, fmt.Errorf("malformed token: %w", err)
 	}
 
-	jwt.NewParser()
-
 	header, err := prettyjson.Marshal(token.Header)
 	if err != nil {
 		return res, fmt.Errorf("can't encode header: %w", err)

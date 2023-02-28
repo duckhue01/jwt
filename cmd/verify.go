@@ -1,11 +1,12 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+Copyright © 2023 NAME HERE duckhue01.tech@gmail.com
 */
 package cmd
 
 import (
 	"fmt"
 
+	"github.com/duckhue01/jwt/jwt"
 	"github.com/spf13/cobra"
 )
 
@@ -15,9 +16,11 @@ var verifyCmd = &cobra.Command{
 	Short: "Verify a JSON web token",
 	Long:  "Verify a JSON web token",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(cmd.Flag("is-expire").Value.String())
-		fmt.Println(cmd.Flag("contain").Value.String())
-		fmt.Println(cmd.Flag("is-valid").Value.String())
+		if len(args) == 1 {
+			jwt.VerifyHandler(args[0], cmd.Flags())
+			return
+		}
+		fmt.Println(REQUIRE_TOKEN_ERROR)
 
 	},
 }
@@ -33,8 +36,9 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	verifyCmd.Flags().Bool("is-expire", false, "Verify if token is expire or not")
-	verifyCmd.Flags().StringSlice("contain", make([]string, 0), "Verify if Token contains specified claims")
-	verifyCmd.Flags().Bool("is-valid", false, "Verify if token is a valid token or not. It means that token is issued from trusted party and doesn't change")
+	verifyCmd.Flags().Bool(jwt.IsExpireFlag, false, "Verify if token is expire or not")
+	verifyCmd.Flags().StringSlice(jwt.ContainFlag, make([]string, 0), "Verify if Token contains specified claims")
+	// todo: implement later
+	// verifyCmd.Flags().Bool(jwt.IsValidFlag, false, "Verify if token is a valid token or not. It means that token is issued from trusted party and doesn't change")
 
 }
