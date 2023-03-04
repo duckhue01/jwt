@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/fatih/color"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/spf13/pflag"
 )
@@ -20,7 +21,7 @@ type IsExpireResp struct {
 	isExpire bool
 }
 
-func IsExpire(exp time.Time) *IsExpireResp {
+func isExpire(exp time.Time) *IsExpireResp {
 	res := &IsExpireResp{
 		now:   time.Now(),
 		expAt: exp,
@@ -34,15 +35,6 @@ func IsExpire(exp time.Time) *IsExpireResp {
 
 	}
 	return res
-}
-
-func IsContain(claims jwt.Claims) map[string]bool {
-	return make(map[string]bool)
-}
-
-// todo: implement later
-func IsValid(token string) bool {
-	return true
 }
 
 func VerifyHandler(eTok string, flags *pflag.FlagSet) error {
@@ -64,19 +56,22 @@ func VerifyHandler(eTok string, flags *pflag.FlagSet) error {
 			return fmt.Errorf("can't get claim: %w", err)
 		}
 
-		res := IsExpire(exp.Time)
-		fmt.Println(res.expAt.Format(time.ANSIC))
-		fmt.Println(res.now.Format(time.ANSIC))
-		fmt.Println(res.isExpire)
+		res := isExpire(exp.Time)
+		if res.isExpire {
+			color.Red(fmt.Sprintf("Token expire time: %s, now: %s\n", res.expAt.Format(time.ANSIC), res.expAt.Format(time.ANSIC)))
+		} else {
+			color.Green(fmt.Sprintf("Token expire time: %s, now: %s\n", res.expAt.Format(time.ANSIC), res.expAt.Format(time.ANSIC)))
+		}
 	}
 
 	if len(requiredClaims) > 0 {
 		claims := token.Claims.(jwt.MapClaims)
-
 		for _, v := range requiredClaims {
-			_, ok := claims[v]
-			if !ok {
-				fmt.Println("don't have", v)
+			res, ok := claims[v]
+			if ok {
+				color.Green(fmt.Sprintf("Expected claim: %v: %v", v, res))
+			} else {
+				color.Red(fmt.Sprintf("Missing claim: %v", v))
 			}
 		}
 	}
