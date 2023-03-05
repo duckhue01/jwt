@@ -19,7 +19,7 @@ For usage info, use the `help` command.
 jwt help
 
 # command specific help
-jwt help encode
+jwt help decode
 ```
 
 ## Usage as a pipe
