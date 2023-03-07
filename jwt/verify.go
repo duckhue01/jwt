@@ -27,13 +27,12 @@ func isExpire(exp time.Time) *IsExpireResp {
 		expAt: exp,
 	}
 
-	if res.expAt.Before(exp) {
-		res.isExpire = false
-
-	} else {
+	if res.expAt.Before(res.now) {
 		res.isExpire = true
-
+	} else {
+		res.isExpire = false
 	}
+
 	return res
 }
 
@@ -58,9 +57,9 @@ func VerifyHandler(eTok string, flags *pflag.FlagSet) error {
 
 		res := isExpire(exp.Time)
 		if res.isExpire {
-			color.Red(fmt.Sprintf("Token expire time: %s, now: %s\n", res.expAt.Format(time.ANSIC), res.expAt.Format(time.ANSIC)))
+			color.Red(fmt.Sprintf("Token expire time: %s, now: %s\n", res.expAt.Format(time.ANSIC), res.now.Format(time.ANSIC)))
 		} else {
-			color.Green(fmt.Sprintf("Token expire time: %s, now: %s\n", res.expAt.Format(time.ANSIC), res.expAt.Format(time.ANSIC)))
+			color.Green(fmt.Sprintf("Token expire time: %s, now: %s\n", res.expAt.Format(time.ANSIC), res.now.Format(time.ANSIC)))
 		}
 	}
 
