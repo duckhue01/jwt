@@ -47,6 +47,7 @@ brews:
     commit_author:
       name: duckhue01
       email: duckhue01.tech@gmail.com
+    download_strategy: CurlDownloadStrategy
 # The lines beneath this are called `modelines`. See `:help modeline`
 # Feel free to remove those if you don't want/use them.
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
