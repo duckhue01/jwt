@@ -5,20 +5,20 @@
 class Jwt < Formula
   desc ""
   homepage "https://github.com/duckhue01/jwt"
-  version "0.1.0"
+  version "0.3.0"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/duckhue01/jwt/releases/download/0.1.0/jwt_Darwin_x86_64.tar.gz"
-      sha256 "adde014cd5791e1c6522e21b459b49eb3d35a6ad6dc2527f240906c8d7aff3d2"
+    if Hardware::CPU.arm?
+      url "https://github.com/duckhue01/jwt/releases/download/v0.3.0/jwt_Darwin_arm64.tar.gz"
+      sha256 "5a9fa6f3049d2b7c71adb10f0f7fadfdfc327631f2a4e63d8cb83aa3811062f0"
 
       def install
         bin.install "jwt"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/duckhue01/jwt/releases/download/0.1.0/jwt_Darwin_arm64.tar.gz"
-      sha256 "93af170ceb9638e54bcc718b05256152cca8c476c0ab461dee612b1755a29d9b"
+    if Hardware::CPU.intel?
+      url "https://github.com/duckhue01/jwt/releases/download/v0.3.0/jwt_Darwin_x86_64.tar.gz"
+      sha256 "d1ed6e4c0e34131ed21f824615d5c56f586e1a88d1ddfee877256dc7cf0e5ee6"
 
       def install
         bin.install "jwt"
@@ -28,16 +28,16 @@ class Jwt < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/duckhue01/jwt/releases/download/0.1.0/jwt_Linux_arm64.tar.gz"
-      sha256 "be50089851502b5dcea56d8d70e1f2a581696e7a79bcb59c01ecca3e9c222965"
+      url "https://github.com/duckhue01/jwt/releases/download/v0.3.0/jwt_Linux_arm64.tar.gz"
+      sha256 "10f6fc399309b9ea49e9cc0214ccdd66d8a2a1a0e034bde1786c4a3723741cf0"
 
       def install
         bin.install "jwt"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/duckhue01/jwt/releases/download/0.1.0/jwt_Linux_x86_64.tar.gz"
-      sha256 "e309dcb827632ed70a0d7c3db09cfc0d1b077cb0723b3ad82bcc8020316bdaaf"
+      url "https://github.com/duckhue01/jwt/releases/download/v0.3.0/jwt_Linux_x86_64.tar.gz"
+      sha256 "6ca59a4ac23f7b6a4563744567bd04d06fa97eb17f2179ae1cc861fcac0726a4"
 
       def install
         bin.install "jwt"
