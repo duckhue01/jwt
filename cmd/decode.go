@@ -7,6 +7,7 @@ import (
 	"fmt"
 
 	"github.com/duckhue01/jwt/jwt"
+	"github.com/hokaccha/go-prettyjson"
 	"github.com/spf13/cobra"
 )
 
@@ -21,14 +22,25 @@ var decodeCmd = &cobra.Command{
 	Long:  "Decode a JSON web token",
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 1 {
-			res, err := jwt.Decode(args[0])
+			token, err := jwt.Decode(args[0])
 			if err != nil {
 				fmt.Println(err)
-
 				return
 			}
-			fmt.Printf("Header(algorithms & token type...):\n%s\n\n", res.Header)
-			fmt.Printf("Body(claims):\n%s\n", res.Body)
+
+			header, err := prettyjson.Marshal(token.Header)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			body, err := prettyjson.Marshal(token.Claims)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			fmt.Printf("Header(algorithms & token type...):\n%s\n\n", header)
+			fmt.Printf("Body(claims):\n%s\n", body)
 
 			return
 		}
