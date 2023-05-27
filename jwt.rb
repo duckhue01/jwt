@@ -5,20 +5,20 @@
 class Jwt < Formula
   desc ""
   homepage "https://github.com/duckhue01/jwt"
-  version "0.3.0"
+  version "0.4.0"
 
   on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/duckhue01/jwt/releases/download/v0.3.0/jwt_Darwin_arm64.tar.gz"
-      sha256 "5a9fa6f3049d2b7c71adb10f0f7fadfdfc327631f2a4e63d8cb83aa3811062f0"
+    if Hardware::CPU.intel?
+      url "https://github.com/duckhue01/jwt/releases/download/v0.4.0/jwt_Darwin_x86_64.tar.gz", using: CurlDownloadStrategy
+      sha256 "512d36743e790cff467fd09f1eadeddc00c142e723d93e67b1d86c76adb8567d"
 
       def install
         bin.install "jwt"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/duckhue01/jwt/releases/download/v0.3.0/jwt_Darwin_x86_64.tar.gz"
-      sha256 "d1ed6e4c0e34131ed21f824615d5c56f586e1a88d1ddfee877256dc7cf0e5ee6"
+    if Hardware::CPU.arm?
+      url "https://github.com/duckhue01/jwt/releases/download/v0.4.0/jwt_Darwin_arm64.tar.gz", using: CurlDownloadStrategy
+      sha256 "37ca757f5e61f9aaffc545d1b1f8b52bc5f8366b88fa105e29363887a63686d0"
 
       def install
         bin.install "jwt"
@@ -27,17 +27,17 @@ class Jwt < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/duckhue01/jwt/releases/download/v0.3.0/jwt_Linux_arm64.tar.gz"
-      sha256 "10f6fc399309b9ea49e9cc0214ccdd66d8a2a1a0e034bde1786c4a3723741cf0"
+    if Hardware::CPU.intel?
+      url "https://github.com/duckhue01/jwt/releases/download/v0.4.0/jwt_Linux_x86_64.tar.gz", using: CurlDownloadStrategy
+      sha256 "ae0e764becdb42a78334592b9a4a79a381ef2084a23d2530e55d5d0f2c853a31"
 
       def install
         bin.install "jwt"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/duckhue01/jwt/releases/download/v0.3.0/jwt_Linux_x86_64.tar.gz"
-      sha256 "6ca59a4ac23f7b6a4563744567bd04d06fa97eb17f2179ae1cc861fcac0726a4"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/duckhue01/jwt/releases/download/v0.4.0/jwt_Linux_arm64.tar.gz", using: CurlDownloadStrategy
+      sha256 "599fe20a0d9abb4019cf7641c8d30fe80bce0c239184e3f06b0549ece74cd95d"
 
       def install
         bin.install "jwt"
