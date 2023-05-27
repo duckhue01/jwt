@@ -42,7 +42,7 @@ brews:
   - name: jwt
     homepage: https://github.com/duckhue01/jwt
     tap:
-      owner: duckhue01
+      owner: duckhue01-tap
       name: jwt
     commit_author:
       name: duckhue01
