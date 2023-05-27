@@ -42,8 +42,8 @@ brews:
   - name: jwt
     homepage: https://github.com/duckhue01/jwt
     tap:
-      owner: duckhue01-tap
-      name: jwt
+      owner: duckhue01
+      name: homebrew-jwt
     commit_author:
       name: duckhue01
       email: duckhue01.tech@gmail.com
