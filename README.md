@@ -1,5 +1,12 @@
 # JWT command line interface tool
 
+<!-- [![License](https://img.shields.io/github/license/bufbuild/buf?color=blue)][badges_license]
+[![Release](https://img.shields.io/github/v/release/bufbuild/buf?include_prereleases)][badges_release]
+[![CI](https://github.com/bufbuild/buf/workflows/ci/badge.svg)][badges_ci]
+[![Docker](https://img.shields.io/docker/pulls/bufbuild/buf)][badges_docker]
+[![Homebrew](https://img.shields.io/badge/homebrew-v1.19.0-blue)][badges_homebrew]
+[![AUR](https://img.shields.io/aur/version/buf)][badges_aur]
+[![Slack](https://img.shields.io/badge/slack-buf-%23e01563)][badges_slack] -->
 
 A super fast CLI tool to decode, encode, and verify JWTs built in [Go](https://go.dev).
 
@@ -8,9 +15,21 @@ A super fast CLI tool to decode, encode, and verify JWTs built in [Go](https://g
 
 On top of all that, it's written in Go so it's fast and portable (windows, macOS, and linux supported right now).
 
-# Installation
+## Installation
 
-# Usage
+### Homebrew
+
+You can install `jwt` using [Homebrew][brew] (macOS or Linux):
+
+```sh
+brew install duckhue01/duckhue01/jwt
+```
+
+### Binary
+
+JWT offers Windows binaries for both the x86_64 and arm64 architectures. You can download the latest binaries from  [GitHub Releases](https://github.com/duckhue01/jwt/releases).
+
+## Usage
 
 For usage info, use the `help` command.
 
@@ -22,10 +41,7 @@ jwt help
 jwt help decode
 ```
 
-## Usage as a pipe
-
-
-# Contributing
+## Contributing
 
 
 
